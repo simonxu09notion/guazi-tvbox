@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="5IK1IRMJ5N4BnjfYqOE5JJ">
+<head data-page-node-id="hboBEP5li8IcHF6YgqIJoK">
+<meta charset="UTF-8" data-page-node-id="Is0NxXdgPrJj9Xl7GXzGww">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="j5USYG0puV13HsVsXkWPQA">
+<title>瓜子影视 · TVBox 接口源</title>
+<style>
+  :root{
+    --bg:#f6f8f7;
+    --card:#ffffff;
+    --line:#e3e8e5;
+    --text:#1f2937;
+    --sub:#6b7280;
+    --green:#16a34a;
+    --green-soft:#ecfdf3;
+    --green-line:#b7ebc6;
+    --code-bg:#0f1f16;
+    --code-text:#d1fae5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:40px 24px 72px;}
+
+  .hero{
+    background:linear-gradient(135deg,#0f3d24 0%,#177245 55%,#1fa85c 100%);
+    border-radius:20px;
+    padding:34px 32px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;right:-60px;top:-60px;
+    width:220px;height:220px;border-radius:50%;
+    background:rgba(255,255,255,.08);
+  }
+  .hero h1{margin:0 0 8px;font-size:27px;letter-spacing:.5px;}
+  .hero p{margin:0;color:rgba(255,255,255,.82);font-size:14.5px;}
+  .badges{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;}
+  .badge{
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:999px;
+    padding:4px 13px;
+    font-size:12.5px;
+    letter-spacing:.3px;
+  }
+
+  h2{
+    font-size:17px;margin:38px 0 14px;
+    padding-left:11px;
+    border-left:4px solid var(--green);
+    line-height:1.3;
+  }
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 18px 16px;
+  }
+  .card .t{font-weight:600;font-size:14.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .card .t .n{
+    width:21px;height:21px;border-radius:6px;
+    background:var(--green-soft);color:var(--green);
+    font-size:12px;display:flex;align-items:center;justify-content:center;
+    font-weight:700;border:1px solid var(--green-line);
+  }
+  .card p{margin:0;font-size:13.5px;color:var(--sub);}
+  .card.reco{border-color:var(--green-line);background:linear-gradient(180deg,#f7fef9,#fff);}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:#fafbfa;font-weight:600;color:var(--sub);font-size:12.5px;letter-spacing:.4px;white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  code.inl{
+    background:#f1f4f2;border:1px solid var(--line);
+    border-radius:5px;padding:1px 6px;font-size:12.5px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    color:#0f5132;
+  }
+
+  .codebox{position:relative;margin-top:12px;}
+  pre{
+    margin:0;background:var(--code-bg);color:var(--code-text);
+    border-radius:12px;padding:16px 18px;overflow-x:auto;
+    font-size:12.8px;line-height:1.65;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  .copy{
+    position:absolute;top:10px;right:10px;
+    background:rgba(255,255,255,.12);color:#e7fff2;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:7px;padding:4px 11px;font-size:12px;cursor:pointer;
+    transition:.15s;
+  }
+  .copy:hover{background:rgba(255,255,255,.22);}
+
+  .note{
+    background:#fffbeb;border:1px solid #fde68a;border-radius:12px;
+    padding:14px 18px;font-size:13.5px;color:#854d0e;margin-top:14px;
+  }
+  .note b{color:#78350f;}
+  .warn{
+    background:#fef2f2;border:1px solid #fecaca;color:#991b1b;
+  }
+  .warn b{color:#7f1d1d;}
+
+  ul.plain{margin:0;padding-left:20px;font-size:13.8px;color:var(--sub);}
+  ul.plain li{margin:5px 0;}
+  ul.plain b{color:var(--text);font-weight:600;}
+
+  footer{
+    margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12.5px;color:#9ca3af;text-align:center;
+  }
+</style>
+</head>
+<body data-page-node-id="Dlq3DBE83zyrfwrudVdPAn">
+<div class="wrap" data-page-node-id="uY9GFVbO8D1XbJUVlhJ6kR">
+
+  <div class="hero" data-page-node-id="9VwieaGsYZbHOtQHwNBDiJ">
+    <h1 data-page-node-id="88fgP6VxsBKF3Gs4fEnB82">瓜子影视 · TVBox 接口源</h1>
+    <p data-page-node-id="KgpUCHF84sZ2n780pDZLm0">把瓜子影视的影视内容封装成 TVBox / 影视仓可直接加载的爬虫接口</p>
+    <div class="badges" data-page-node-id="90cKONz13SahDBLRtIBNNx">
+      <span class="badge" data-page-node-id="DLc9FBec71V1LqbhFF51JH">type 3 · JAR 爬虫</span>
+      <span class="badge" data-page-node-id="sU0Gik930h3FvGQYYVkM2y">csp_Gz360</span>
+      <span class="badge" data-page-node-id="hrJsu7WUskKg2yCQiiTndi">支持搜索 / 筛选</span>
+      <span class="badge" data-page-node-id="x0OlEbYM2P5xOc5o5CT5TG">无需账号</span>
+    </div>
+  </div>
+
+  <h2 data-page-node-id="svojCoewCpJTFbzemfGDtV">交付文件</h2>
+  <table data-page-node-id="y2Ex0mcqFI2YDTXsPxIDBl">
+    <tr data-page-node-id="8mJL9SJoO2O7JJAyZtvAmQ"><th data-page-node-id="5Xd8RarWA5AKubzzHLli0M">文件</th><th data-page-node-id="Qklbf8gK78RKl9vDHiuqD0">用途</th></tr>
+    <tr data-page-node-id="7WxKXmiU43ahL6D6HyRpeZ">
+      <td data-page-node-id="rAylOBRqkEsfNEHYGJwDpy"><code class="inl" data-page-node-id="joePaSlgEi8cRst3Ie6MGV">api.json</code></td>
+      <td data-page-node-id="isVv4DgDBSmj7AtyC0AelH">本地包版配置，jar 走相对路径 <code class="inl" data-page-node-id="EpKRhBEp9t1t2YJPHGDXsQ">./lib/tvkj.jar</code>，自托管部署用</td>
+    </tr>
+    <tr data-page-node-id="rUmJmvX0xKypcBmf96apXh">
+      <td data-page-node-id="UcW8yFQ5HyBHW9IZoJKdih"><code class="inl" data-page-node-id="tB5YZsKSGwXyHxusCUoLrf">api-online.json</code></td>
+      <td data-page-node-id="tp0su4pjz1vNI0F7wNg4Cs">在线版配置，jar 走公网直链，可直接填进 TVBox 配置地址</td>
+    </tr>
+    <tr data-page-node-id="bTYiHNSUdP6yeRYUGtxDhe">
+      <td data-page-node-id="DQsvq1k9MVzDiO5rcEgNhq"><code class="inl" data-page-node-id="jHjXy9MAG9qWGAlVdRLuYj">lib/tvkj.jar</code></td>
+      <td data-page-node-id="j13vF4HAHVVDc4gZG1OVzw">爬虫包，内含 <code class="inl" data-page-node-id="lmxzSqBTMjevrZNvZR55rt">com.github.catvod.spider.Gz360</code>，2.0 MB</td>
+    </tr>
+  </table>
+
+  <h2 data-page-node-id="aLZQQFcDhzQF5q8MQ9J6V1">三种接入方式</h2>
+  <div class="grid" data-page-node-id="vDXqXGmLnaboSfUvXZLcsY">
+    <div class="card reco" data-page-node-id="6YeobUAzMbYegXynuMnbK8">
+      <div class="t" data-page-node-id="kmeYhRCXBDFc6Je1iZytKA"><span class="n" data-page-node-id="9zFu7wwTZ7oYWMwA5tBCfl">1</span>本地包（推荐）</div>
+      <p data-page-node-id="jR6vEZvQHgJiAlHDye4pIb">整个文件夹丢进盒子存储，配置地址填 <code class="inl" data-page-node-id="lGzGjFyHzPVMvFxIEhAVAx">file:///sdcard/TVBox/…/api.json</code>，不依赖任何第三方 CDN。</p>
+    </div>
+    <div class="card" data-page-node-id="kwhrGkPyO71mqA9W3y8aNQ">
+      <div class="t" data-page-node-id="qAN5qx3j7CtJUugKHHNqkG"><span class="n" data-page-node-id="20CPTw4Xamp5F7AXhgUhCu">2</span>在线订阅</div>
+      <p data-page-node-id="MgrwlPvmd9z2OzmxilmXdm">把 <code class="inl" data-page-node-id="G8uivZV9n1SsPHMlnZSjsz">api-online.json</code> 托管到自己的服务器或仓库 raw 地址，填进 TVBox 的配置地址即可。</p>
+    </div>
+    <div class="card" data-page-node-id="Lf3vJI7QtJeEtqniOtt2Kc">
+      <div class="t" data-page-node-id="En9EEx41k1dYEZNsgeJ0UZ"><span class="n" data-page-node-id="bvqANbMyZYLvte9inCKwbR">3</span>并入已有接口</div>
+      <p data-page-node-id="pdWS39QBk5kww68K9slPoF">把那一个 site 对象追加进你现有配置的 <code class="inl" data-page-node-id="GgT8wkcLAtZFWKdx0A1SB1">sites</code> 数组，全局 spider 不用动。</p>
+    </div>
+  </div>
+
+  <h2 data-page-node-id="2JmmV0tMAa9ULW9ibIDrUe">核心配置</h2>
+  <div class="codebox" data-page-node-id="NFI91dof7KyOtdgjWfqOpK">
+    <button class="copy" onclick="copyCfg(this)" data-page-node-id="7WfgCEUgrXKjfyRhHXdxKA">复制</button>
+    <pre id="cfg" data-page-node-id="8wAE30gPa10eSdALAwcKwK">{
+  "sites": [
+    {
+      "key": "guazi_gz360",
+      "name": "瓜子影视",
+      "type": 3,
+      "api": "csp_Gz360",
+      "jar": "./lib/tvkj.jar",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "style": { "type": "rect", "ratio": 1.78 }
+    }
+  ]
+}</pre>
+  </div>
+
+  <h2 data-page-node-id="MPkY3TT0Z8yPvyA39tJJDi">技术要点</h2>
+  <table data-page-node-id="2tV9YkHAKUE4ig4jJ9XfL4">
+    <tr data-page-node-id="VAtTE1902NFEspsSbrH4iY"><th data-page-node-id="pCoMY2M5WIcyP7YK0sGyCh">项目</th><th data-page-node-id="g70bvRX7hmELQz76Ro74fw">说明</th></tr>
+    <tr data-page-node-id="crzwdUnqtQnWHqZlakgluK"><td data-page-node-id="2771FIKd3a3D5R6ZoURGdG">通信加密</td><td data-page-node-id="pblHaDzxUjpgMIpvBYg9rH">请求体 AES-128-CBC 加密 → 密钥经 RSA(PKCS#1 v1.5) 打包 → MD5 签名；响应反向解密</td></tr>
+    <tr data-page-node-id="dMEyDPfhCB5gQlwC2GEB8k"><td data-page-node-id="RlHJ6gu5ZkmAc5nih4nsMq">签名盐</td><td data-page-node-id="ffqvEtkyiHOGZNBHWhvSZ0">固定串 <code class="inl" data-page-node-id="6obGvvzoJOkJMe3yhXFh29">*&amp;zvdvdvddbfikkkumtmdwqppp?|4Y!s!2br</code></td></tr>
+    <tr data-page-node-id="lkg4fV0JuFzcgpwUtm8sHQ"><td data-page-node-id="lQwMb22pSMXViEDYjw6g4H">设备认证</td><td data-page-node-id="gTTyGJ4wg7NvltBwilgkbF">自动走 <code class="inl" data-page-node-id="HTDXdYDaF3JvZTv5k0GrV0">/App/Authentication/Device/signUp</code> 匿名注册并刷新 token</td></tr>
+    <tr data-page-node-id="X6glc7QuibS8Cq6Js4ViPA"><td data-page-node-id="OnV9KHkMxEOXPnGgc6Gv9b">接口域名</td><td data-page-node-id="VepQGM6uQvOflZ8SVSjoa5"><code class="inl" data-page-node-id="rRpbhdVgmf0UTZXUne8YvT">apinew.uozvr.com</code> / <code class="inl" data-page-node-id="zFDvC7BA8S37utILHL6pHN">api.w32z7vtd.com</code> / <code class="inl" data-page-node-id="SLHv7q9Jlz2qXhReojshIo">api.6a7nnf7.com</code> 等多域名轮询</td></tr>
+    <tr data-page-node-id="orRE4dGMEUJvnaGIqlkjxj"><td data-page-node-id="CHHZg8eU5MVDENStEFdOdS">内容分类</td><td data-page-node-id="0Vp5krCWkEsomEXQvNof0M">电影 / 电视剧 / 动漫 / 综艺 / 短剧，支持地区 + 年份 + 排序三段筛选</td></tr>
+    <tr data-page-node-id="QKv2aMZRrw2ondZtnhgLQj"><td data-page-node-id="RGLFwVyZzYVmDH6zkWJzDK">jar MD5</td><td data-page-node-id="W84TkJ3e65qPZRfeGXzxVl"><code class="inl" data-page-node-id="6wZg8o1Pm03cL7hPx0Xtnx">b9584d007155b163aa5cd92a4fd4ceda</code></td></tr>
+  </table>
+
+  <div class="note" data-page-node-id="FFRW3l3DhOmb501Ko87zLH">
+    <b data-page-node-id="CIuYFAs8tCPKTsclFzIz8y">为什么不能用 JS 规则源（drpy）？</b><br data-page-node-id="Bj9WYZFLYR5dOM7kNaG1uc">
+    瓜子是 AES + RSA 双层密钥交换再加 MD5 签名，且响应用私钥解密 —— JS 沙箱里既没有 RSA 原语也拿不到那一对密钥，只能走 JAR 爬虫。
+  </div>
+
+  <h2 data-page-node-id="MlzdQWwDzeGWAm3mXLhDvv">排错提示</h2>
+  <ul class="plain" data-page-node-id="LLRUUaHjsQDIOsRQCC3tzM">
+    <li data-page-node-id="FlatnNwQfoG8wQugwq3LRR"><b data-page-node-id="wOkNiEV1qPeN9DRwVKoSJo">放不出画面</b> — 先查 jar 是否下载完整。带 <code class="inl" data-page-node-id="j4f1GlVRfO7IjQ0fDHoC1I">;md5;</code> 校验的地址，MD5 不匹配 TVBox 会直接拒绝加载。</li>
+    <li data-page-node-id="koMW7LnaH6tez7CqbAlDpn"><b data-page-node-id="MWoTSr6sEgJvZX07RZm2DQ">搜索有结果、点播报错</b> — 瓜子对请求头敏感且域名会轮换；原域名全挂时需要按新版客户端重新抓取域名列表并替换 jar。</li>
+    <li data-page-node-id="BX1VpYTxW3tIHL15GtGfyC"><b data-page-node-id="iscfBX6bmBp7bkGhpi8wyI">推荐在电视端用本地包</b> — 避免公网 CDN 抽风导致的加载失败。</li>
+  </ul>
+
+  <div class="note warn" data-page-node-id="C1RpwpOYA8OpggCfDRgU1S">
+    <b data-page-node-id="ylTXnDZRCJhJRTeCoYfaXW">免责声明</b><br data-page-node-id="zsBjHLF3FpnkdfChC2FxE3">
+    <code class="inl" data-page-node-id="Oyz8q2pQfRSUmB7g1q6nju">lib/tvkj.jar</code> 来自公网开源的 TVBox 爬虫合集，本接口包仅作技术学习与本地测试用途。请在遵守当地法律法规、尊重内容版权的前提下使用，不得用于任何商业分发场景。
+  </div>
+
+  <footer data-page-node-id="ukMw8ObnjNmJAG4Sa6ldnl">瓜子影视 TVBox 接口源 · 生成于 2026-09-12</footer>
+</div>
+
+<script>
+function copyCfg(btn){
+  var t = document.getElementById('cfg').innerText;
+  navigator.clipboard.writeText(t).then(function(){
+    var old = btn.textContent;
+    btn.textContent = '已复制';
+    setTimeout(function(){ btn.textContent = old; }, 1400);
+  }).catch(function(){
+    btn.textContent = '复制失败';
+    setTimeout(function(){ btn.textContent = '复制'; }, 1400);
+  });
+}
+</script>
+</body>
+</html>
