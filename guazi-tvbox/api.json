@@ -2,7 +2,7 @@
   "name": "瓜子影视接口源",
   "version": "1.0",
   "description": "瓜子影视 TVBox 在线接口（JAR 爬虫版）",
-  "spider": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
+  "spider": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
   "wallpaper": "",
   "sites": [
     {
@@ -10,7 +10,7 @@
       "name": "瓜子影视",
       "type": 3,
       "api": "csp_Gz360",
-      "jar": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
+      "jar": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
