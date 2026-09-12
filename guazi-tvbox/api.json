@@ -1,8 +1,8 @@
 {
   "name": "瓜子影视接口源",
-  "version": "1.0",
-  "description": "瓜子影视 TVBox 在线接口（JAR 爬虫版）",
-  "spider": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
+  "version": "1.1",
+  "description": "瓜子影视 TVBox 在线接口（JAR 爬虫版 · 公钥已更新 · 强制 IPv4）",
+  "spider": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;42a4296c16bd3e32f7fd4b7ca2b7b69d",
   "wallpaper": "",
   "sites": [
     {
@@ -10,7 +10,7 @@
       "name": "瓜子影视",
       "type": 3,
       "api": "csp_Gz360",
-      "jar": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;b9584d007155b163aa5cd92a4fd4ceda",
+      "jar": "https://raw.githubusercontent.com/simonxu09notion/guazi-tvbox/main/guazi-tvbox/lib/tvkj.jar;md5;42a4296c16bd3e32f7fd4b7ca2b7b69d",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -45,7 +45,6 @@
     "api.umygrx3.com:2.16.62.168",
     "api.rmedphk.com:2.16.62.147",
     "apinew.uozvr.com:60.247.227.70"
-],
-
+  ],
   "ads": []
 }
