@@ -38,6 +38,14 @@
     "bilibili"
   ],
   "rules": [],
-  "hosts": [],
+  "hosts": [
+    "api.9cec79d.com:2.16.62.138",
+    "api.w32z7vtd.com:2.16.62.138",
+    "api.6a7nnf7.com:2.19.126.143",
+    "api.umygrx3.com:2.16.62.168",
+    "api.rmedphk.com:2.16.62.147",
+    "apinew.uozvr.com:60.247.227.70"
+],
+
   "ads": []
 }
